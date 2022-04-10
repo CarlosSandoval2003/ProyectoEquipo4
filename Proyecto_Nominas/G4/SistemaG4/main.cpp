@@ -23,18 +23,20 @@ using std::setw;
 using std::setprecision;
 
 #include <cstdlib>
+
 using namespace std;
 
 //Declaracion de las funciones para abrir los menus
+
 void consultas();
 void gestionEmpleados();
 void contabilidad();
 void seguridad();
 
-main()
+int main()
 {
-//inicio menu principal
-int choice;
+    system("cls");
+    int choice;
 	char x;
 	do
     {
