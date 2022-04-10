@@ -1,6 +1,5 @@
 #ifndef PERSONA_H
 #define PERSONA_H
-
 #include <iostream>
 #include<conio.h>
 using std::cout;
