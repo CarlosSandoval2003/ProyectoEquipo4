@@ -1263,3 +1263,48 @@ Grupo4
 1:57:26
 Se realizo consulta de Poliza
 
+Grupo4         
+11/05/2022
+2:10:59
+Ingreso de usuario y contrasena exitoso
+
+Grupo4         
+11/05/2022
+2:11:0
+Ingreso a Gestion de Empleados
+
+Grupo4         
+11/05/2022
+2:11:2
+Se agrego un nuevo Empleado
+
+Grupo4         
+11/05/2022
+2:12:13
+Ingreso a Menu Contabilidad
+
+Grupo4         
+11/05/2022
+2:12:16
+Se realizo consulta de Nomina
+
+Grupo4         
+11/05/2022
+2:13:4
+Ingreso a Menu Consultas
+
+Grupo4         
+11/05/2022
+2:13:5
+Se realizo consulta de Empleados
+
+Grupo4         
+11/05/2022
+2:13:18
+Ingreso a Gestion de Empleados
+
+Grupo4         
+11/05/2022
+2:13:21
+Se agrego un nuevo Empleado
+

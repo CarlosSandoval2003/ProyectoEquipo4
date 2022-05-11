@@ -555,13 +555,6 @@ void Persona::nuevoRegistro( fstream &insertarEnArchivo )
       Anticipos = (TDevengado*0.4);
       TDescuentos = (IGSS+ISR+Anticipos);
       LiquidoR = (sueldo-TDescuentos+Bincentivo);
-        cout<< "Sueldo Extra: "<<SueldoEx<< endl;
-      cout<< "Total Devengado: " <<TDevengado << endl;
-      cout<< "IGSS: " <<IGSS << endl;
-      cout<< "ISR: " <<ISR << endl;
-      cout<< "Anticipos : "<<Anticipos << endl;
-      cout<< "Total Descuentos: " <<TDescuentos << endl;
-      cout<< "Total Liquido A Recibir :" <<LiquidoR << endl;
       }
       else
       {
@@ -572,13 +565,6 @@ void Persona::nuevoRegistro( fstream &insertarEnArchivo )
       Anticipos = (TDevengado*0.4);
       TDescuentos = (IGSS+ISR+Anticipos);
       LiquidoR = (sueldo-TDescuentos+Bincentivo);
-        cout<< "Sueldo Extra: " <<SueldoEx<< endl;
-      cout<< "Total Devengado: " <<TDevengado << endl;
-      cout<< "IGSS: " <<IGSS << endl;
-      cout<< "IRS: "<< ISR<< endl;
-      cout<< "Anticipos : "<<Anticipos << endl;
-      cout<< "Total Descuentos: " <<TDescuentos << endl;
-      cout<< "Total Liquido A Recibir :" <<LiquidoR << endl;
       }
 
       // usar valores para llenar los valores del empleado
