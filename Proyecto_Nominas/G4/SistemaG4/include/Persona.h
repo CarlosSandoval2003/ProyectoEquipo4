@@ -32,7 +32,7 @@ class Persona {
 public:
 
    // constructor clase Persona
-   Persona( int = 0, string = "", string = "", int = 0, int = 0, string = "", string = "", int = 0, int = 0, int = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0);
+   Persona( int = 0, string = "", string = "", int = 0, int = 0, string = "", string = "", string = "", int = 0, int = 0, int = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0);
 
    // Funciones para obtener el ID
    void establecerId( int );
@@ -93,6 +93,12 @@ public:
    void establecerLiquidoR( double );
    double obtenerLiquidorR() const;
 
+   void establecerPAlimenticia(double);
+   double obtenerPAlimenticia() const;
+
+   void establecerRAlimenticio( string );
+   string obtenerRAlimenticio() const;
+
    //Funciones para el tratado de archivos
     void imprimirRegistro( fstream& );
     void imprimirRegistro2( fstream& );
@@ -130,6 +136,8 @@ private:
    double TDescuentos;
    double Bincentivo;
    double LiquidoR;
+   double PAlimenticia;
+   char RAlimenticio[5] ;
 };
 
 #endif

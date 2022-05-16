@@ -13,9 +13,9 @@ using std::string;
 // constructor Persona
 Persona::Persona( int valorNumeroId,
    string valorApellido, string valorPrimerNombre,
-   int valorSueldo, int valorCuenta, string valorPuesto, string valorEmail,
+   int valorSueldo, int valorCuenta, string valorPuesto, string valorEmail, string valorRAlimenticio,
    int valorHoras, int valorDias, int ValorVHoras, double ValorSueldoEx, double ValorComisiones, double ValorDevengado, double ValorIGSS, double ValorISR,
-  double ValorAnticipos, double ValorTDescuentos, double ValorBincentivo, double ValorLiquido)
+  double ValorAnticipos, double ValorTDescuentos, double ValorBincentivo, double ValorLiquido, double ValorAlimenticio)
 {
    establecerId( valorNumeroId );
    establecerApellido( valorApellido );
@@ -36,6 +36,8 @@ Persona::Persona( int valorNumeroId,
    establecerTDescuentos( ValorTDescuentos);
    establecerBincentivo( ValorBincentivo );
    establecerLiquidoR(ValorLiquido);
+   establecerPAlimenticia(ValorAlimenticio);
+   establecerRAlimenticio(valorRAlimenticio);
 }
 
 // obtener el valor del ID
@@ -285,7 +287,36 @@ void Persona::establecerLiquidoR( double ValorLiquido )
 {
     LiquidoR = ValorLiquido;
 }
+double Persona::obtenerPAlimenticia () const
+{
+    return PAlimenticia;
+}
 
+void Persona::establecerPAlimenticia ( double ValorAlimenticio)
+{
+    PAlimenticia = ValorAlimenticio;
+
+}
+
+string Persona::obtenerRAlimenticio() const
+{
+   return RAlimenticio;
+
+}
+
+// establecer el valor del primer nombre
+void Persona::establecerRAlimenticio( string RAlimenticioString )
+{
+
+   const char *valorRAlimenticio = RAlimenticioString.data();
+   int longitud = strlen( valorRAlimenticio );
+   longitud = ( longitud < 10 ? longitud : 9 );
+   strncpy( RAlimenticio, valorRAlimenticio, longitud );
+
+
+   RAlimenticio[ longitud ] = '\0';
+
+}
 
 
 
@@ -302,10 +333,10 @@ void Persona::imprimirRegistro( fstream &leerDeArchivo )
 
    }
 
-   archivoImprimirSalida<< left << setw( 10 ) << "ID" << setw( 16 )
-       << "Apellido" << setw( 14 ) << "Primer nombre"
-       << setw( 14 ) << "Sueldo(Q)" <<setw( 21 )<<"No. Cuenta"<<setw( 31 )<<"Email"
-       <<setw( 15 )<<"Puesto"<<setw( 12 )<<"Horas Extra"<<setw( 24 )<<"Dias Laburados del Mes"<<endl;
+   archivoImprimirSalida<< left << setw( 4 ) << "ID" << setw( 12 )
+       << "Apellido" << setw( 14 ) << "Primer nombre" <<
+       setw( 12 )<<"Sueldo(Q)"<<setw(16)<<"No. Cuenta"<<setw(27)<<"Email"
+       <<setw( 12 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
 
    // colocar el apuntador de posición de archivo al principio del archivo de registros
    leerDeArchivo.seekg( 0 );
@@ -342,9 +373,11 @@ void Persona::imprimirRegistro2( fstream &leerDeArchivo )
       exit( 1 );
 
    }
-   archivoImprimirSalida << left << setw( 10 ) << "ID" << setw( 16 )
-       << "Apellido" << setw( 14 ) << "Primer nombre"
-       << setw( 14 ) << "Sueldo(Q)" <<setw( 21 )<<setw( 12 )<<"Horas Extra"<<setw( 24 )<<"Dias Laburados del Mes"<<endl;
+   archivoImprimirSalida<< left << setw( 4 ) << "ID" << setw( 12 )
+       << "Apellido" << setw( 14 ) << "Primer nombre" <<
+       setw( 12 )<<"Sueldo(Q)"<<setw(12)<<"Horas Extra"<<setw(15)<<"Dias Laborados"<<setw(11)<<"Comisiones"<<setw(12)<<"Valor Horas"
+       <<setw(26)<<"Sueldo Extraordinario (Q)"<<setw(16)<<"Total Devengado"<<setw(9)<<"IGSS"
+        <<setw(9)<<"ISR"<<setw(10)<<"Anticipos"<<setw(17)<<"Total Descuento"<<setw(16)<<"Bono Incentivo"<<setw(17)<<"Liquido Recibir"<<setw(8)<<"Pension A."<< endl;
    leerDeArchivo.seekg( 0 );
 
    // leer el primer registro del archivo de registros
@@ -386,10 +419,10 @@ void Persona::actualizarRegistro( fstream &actualizarArchivo )
    // actualizar el registro
    if ( empleado.obtenerNumeroId() != 0 ) {
 
-cout << left << setw( 10 ) << "ID" << setw( 16 )
+cout << left << setw( 4 ) << "ID" << setw( 12 )
        << "Apellido" << setw( 14 ) << "Primer nombre" <<
-       setw( 14 )<<"Sueldo(Q)"<<setw(21)<<"No. Cuenta"<<setw(31)<<"Email"
-       <<setw( 15 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
+       setw( 12 )<<"Sueldo(Q)"<<setw(16)<<"No. Cuenta"<<setw(27)<<"Email"
+       <<setw( 12 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
       mostrarLinea( cout, empleado );
 
       // solicitar al usuario que especifique la transacción
@@ -465,10 +498,10 @@ cout << left << setw( 10 ) << "ID" << setw( 16 )
 		cout<<"\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
 	}
 
-     cout << left << setw( 10 ) << "ID" << setw( 16 )
+cout << left << setw( 4 ) << "ID" << setw( 12 )
        << "Apellido" << setw( 14 ) << "Primer nombre" <<
-       setw( 14 )<<"Sueldo(Q)"<<setw(21)<<"No. Cuenta"<<setw(31)<<"Email"
-       <<setw( 15 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
+       setw( 12 )<<"Sueldo(Q)"<<setw(16)<<"No. Cuenta"<<setw(27)<<"Email"
+       <<setw( 12 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
       mostrarLinea( cout, empleado );
 
       // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
@@ -525,12 +558,16 @@ void Persona::nuevoRegistro( fstream &insertarEnArchivo )
       double TDescuentos;
       double Bincentivo;
       double LiquidoR;
+      double PAlimenticia;
+      int RAlimenticio;
 
       // el usuario introduce los datos
       cout << "Escriba el apellido : " << endl;
       cin >> setw( 15 ) >> apellido;
       cout << "Escriba el nombre: " << endl;
       cin >> setw( 10 ) >> primerNombre;
+      cout<<"¿Tiene vigencia Pensión Alimenticia: 1= Si / 2 = No"<<endl;
+      cin>>setw(8)>>RAlimenticio;
       cout << "Escriba el sueldo: "<<endl;
       cin >> setw( 14 ) >> sueldo;
       cout << "Escriba el no. de cuenta: "<<endl;
@@ -547,7 +584,30 @@ void Persona::nuevoRegistro( fstream &insertarEnArchivo )
       cin>> setw(6)>>Comisiones;
       Bincentivo = 250;
       Vhoras= 25;
-      if (sueldo >= 4000){
+      switch(RAlimenticio){
+     case 1:
+     if (sueldo >= 4000 ){
+        SueldoEx = (hExtra*Vhoras);
+      TDevengado = (SueldoEx+Comisiones+sueldo);
+      IGSS = (TDevengado*0.0483);
+      ISR = (((TDevengado*12)-(48000+(IGSS*12)))*0.05)/12;
+      Anticipos = (TDevengado*0.4);
+      TDescuentos = (IGSS+ISR+Anticipos);
+      LiquidoR = (sueldo-TDescuentos+Bincentivo);
+      PAlimenticia = ((Anticipos+LiquidoR)*0.4512);
+      }
+      else{
+    ISR = 0;
+    SueldoEx = (hExtra*Vhoras);
+      TDevengado = (SueldoEx+Comisiones+sueldo);
+      IGSS = (TDevengado*0.0483);
+      Anticipos = (TDevengado*0.4);
+      TDescuentos = (IGSS+ISR+Anticipos);
+      LiquidoR = (sueldo-TDescuentos+Bincentivo);
+    PAlimenticia = ((Anticipos+LiquidoR)*0.4512);
+      }
+      case 2:
+   if (sueldo >= 4000 ){
         SueldoEx = (hExtra*Vhoras);
       TDevengado = (SueldoEx+Comisiones+sueldo);
       IGSS = (TDevengado*0.0483);
@@ -556,22 +616,23 @@ void Persona::nuevoRegistro( fstream &insertarEnArchivo )
       TDescuentos = (IGSS+ISR+Anticipos);
       LiquidoR = (sueldo-TDescuentos+Bincentivo);
       }
-      else
-      {
-        ISR= 0;
-         SueldoEx = (hExtra*Vhoras);
+      else{
+    ISR = 0;
+    SueldoEx = (hExtra*Vhoras);
       TDevengado = (SueldoEx+Comisiones+sueldo);
       IGSS = (TDevengado*0.0483);
       Anticipos = (TDevengado*0.4);
       TDescuentos = (IGSS+ISR+Anticipos);
       LiquidoR = (sueldo-TDescuentos+Bincentivo);
       }
+  	}
+
 
       // usar valores para llenar los valores del empleado
       empleado.establecerApellido( apellido );
       empleado.establecerPrimerNombre( primerNombre );
-      empleado.establecerSueldo( sueldo );
       empleado.establecerPuesto( puesto );
+      empleado.establecerSueldo( sueldo );
       empleado.establecerId( numeroId );
       empleado.establecerCuenta(noCuenta);
       empleado.establecerEmail(email);
@@ -587,6 +648,7 @@ void Persona::nuevoRegistro( fstream &insertarEnArchivo )
       empleado.establecerTDescuentos(TDescuentos);
       empleado.establecerBincentivo(Bincentivo);
       empleado.establecerLiquidoR(LiquidoR);
+      empleado.establecerPAlimenticia(PAlimenticia);
       // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
       insertarEnArchivo.seekp( ( numeroId - 1 ) *
          sizeof( Persona ) );
@@ -643,10 +705,10 @@ void Persona::eliminarRegistro( fstream &eliminarDeArchivo )
 void Persona::consultarRegistro( fstream &leerDeArchivo )
 {
 
-    cout << left << setw( 10 ) << "ID" << setw( 16 )
+    cout << left << setw( 4 ) << "ID" << setw( 12 )
        << "Apellido" << setw( 14 ) << "Primer nombre" <<
-       setw( 14 )<<"Sueldo(Q)"<<setw(21)<<"No. Cuenta"<<setw(31)<<"Email"
-       <<setw( 9 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
+       setw( 12 )<<"Sueldo(Q)"<<setw(16)<<"No. Cuenta"<<setw(27)<<"Email"
+       <<setw( 12 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
    // colocar el apuntador de posición de archivo al principio del archivo de registros
    leerDeArchivo.seekg( 0 );
 
@@ -677,7 +739,7 @@ cout << left << setw( 4 ) << "ID" << setw( 12 )
        << "Apellido" << setw( 14 ) << "Primer nombre" <<
        setw( 12 )<<"Sueldo(Q)"<<setw(12)<<"Horas Extra"<<setw(15)<<"Dias Laborados"<<setw(11)<<"Comisiones"<<setw(12)<<"Valor Horas"
        <<setw(26)<<"Sueldo Extraordinario (Q)"<<setw(16)<<"Total Devengado"<<setw(9)<<"IGSS"
-        <<setw(9)<<"ISR"<<setw(10)<<"Anticipos"<<setw(17)<<"Total Descuento"<<setw(16)<<"Bono Incentivo"<<setw(12)<<"Liquido Recibir"<< endl;
+        <<setw(9)<<"ISR"<<setw(10)<<"Anticipos"<<setw(17)<<"Total Descuento"<<setw(16)<<"Bono Incentivo"<<setw(17)<<"Liquido Recibir"<<setw(8)<<"Pension A."<< endl;
 
    // colocar el apuntador de posición de archivo al principio del archivo de registros
    leerDeArchivo.seekg( 0 );
@@ -705,28 +767,28 @@ cout << left << setw( 4 ) << "ID" << setw( 12 )
 // mostrar registro individual
 void Persona::mostrarLinea( ostream &salida, const Persona &registro )
 {
-   salida << left << setw( 10 ) << registro.obtenerNumeroId()
-          << setw( 16 ) << registro.obtenerApellido().data()
+    salida<< left << setw( 4 ) << registro.obtenerNumeroId()
+          << setw( 12 ) << registro.obtenerApellido().data()
           << setw( 14 ) << registro.obtenerPrimerNombre().data()
-          << setw( 14 ) << registro.obtenerSueldo()
-          << setw( 21 ) << registro.obtenerCuenta()
-          << setw( 31 ) << registro.obtenerEmail().data()
-          << setw( 15 ) << registro.obtenerPuesto().data()
-          << setw( 14 ) << registro.obtenerHoras()
-          << setw( 2 ) << registro.obtenerDias()<<endl;
+          << setw( 12 ) << registro.obtenerSueldo()
+          << setw( 16 ) << registro.obtenerCuenta()
+          << setw( 27 ) << registro.obtenerEmail().data()
+          << setw( 12 ) << registro.obtenerPuesto().data()
+          << setw( 12 ) << registro.obtenerHoras()
+          << setw( 15 ) << registro.obtenerDias()<<endl;
 
 }
 void Persona::mostrarLineaPantalla( const Persona &registro )
 {
-   cout << left << setw( 10 ) << registro.obtenerNumeroId()
-          << setw( 16 ) << registro.obtenerApellido().data()
+   cout << left << setw( 4 ) << registro.obtenerNumeroId()
+          << setw( 12 ) << registro.obtenerApellido().data()
           << setw( 14 ) << registro.obtenerPrimerNombre().data()
-          << setw( 14 ) << registro.obtenerSueldo()
-          << setw( 21 ) << registro.obtenerCuenta()
-          << setw( 31 ) << registro.obtenerEmail().data()
-          << setw( 15 ) << registro.obtenerPuesto().data()
-          << setw( 14 ) << registro.obtenerHoras()
-          << setw( 2 ) << registro.obtenerDias()<<endl;
+          << setw( 12 ) << registro.obtenerSueldo()
+          << setw( 16 ) << registro.obtenerCuenta()
+          << setw( 27 ) << registro.obtenerEmail().data()
+          << setw( 12 ) << registro.obtenerPuesto().data()
+          << setw( 12 ) << registro.obtenerHoras()
+          << setw( 15) << registro.obtenerDias()<<endl;
 }
 
 void Persona::mostrarLinea2( ostream &salida, const Persona &registro )
@@ -746,7 +808,8 @@ void Persona::mostrarLinea2( ostream &salida, const Persona &registro )
           << setw( 10 ) << registro.obtenerAnticipos()
           << setw( 17 ) << registro.obtenerTDescuentos()
           << setw( 16) << registro.obtenerBincentivo()
-          << setw( 12 ) << registro.obtenerLiquidorR()<<endl;
+          << setw( 17 ) << registro.obtenerLiquidorR()
+          <<setw(8)<< registro.obtenerPAlimenticia()<<endl;
 }
 void Persona::mostrarLineaPantalla2( const Persona &registro )
 {
@@ -765,7 +828,8 @@ void Persona::mostrarLineaPantalla2( const Persona &registro )
           << setw( 10 ) << registro.obtenerAnticipos()
           << setw( 17 ) << registro.obtenerTDescuentos()
           << setw( 16) << registro.obtenerBincentivo()
-          << setw( 12 ) << registro.obtenerLiquidorR()<<endl;
+          << setw( 17 ) << registro.obtenerLiquidorR()
+          <<setw(8)<< registro.obtenerPAlimenticia()<<endl;
 
 }
 
@@ -834,10 +898,10 @@ void Persona::busquedaRegistro(fstream &actualizarArchivo)
       sizeof( Persona ) );
 if ( empleado.obtenerNumeroId() != 0 ) {
       //MOstrar la informacion obtenida
-       cout << left << setw( 10 ) << "ID" << setw( 16 )
+       cout << left << setw( 4 ) << "ID" << setw( 12 )
        << "Apellido" << setw( 14 ) << "Primer nombre" <<
-       setw( 14 )<<"Sueldo(Q)"<<setw(21)<<"No. Cuenta"<<setw(31)<<"Email"
-       <<setw( 15 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
+       setw( 12 )<<"Sueldo(Q)"<<setw(16)<<"No. Cuenta"<<setw(27)<<"Email"
+       <<setw( 12 )<< "Puesto"<<setw(12)<<"Horas Extra"<<setw(24)<<"Dias Laburados del Mes" << endl;
       mostrarLinea( cout, empleado );
 
       // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
