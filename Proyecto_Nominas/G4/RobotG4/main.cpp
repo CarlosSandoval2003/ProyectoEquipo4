@@ -44,6 +44,8 @@ int main()
 
      }
 
+
+     //Implementacion Segundo Nivel - Carlos Sandoval 9959-21-1324
             if (map.opcion = 1){
                 //system("cls");
             map.drawPortada2();
@@ -69,6 +71,7 @@ int main()
 
                 }
         }
+        //Implementacion tercer Nivel - Meyglin Rosales 9959-21-4490
             if (map.opcion = 1){
                 //system("cls");
             map.drawPortada3();
@@ -96,6 +99,8 @@ int main()
 
 
         }
+
+        //Implementacion Cuarto Nivel - Meyglin Rosales 9959-21-4490
             if (map.opcion = 1){
                 //system("cls");
             map.drawPortada4();
